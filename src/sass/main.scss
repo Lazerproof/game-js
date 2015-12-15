@@ -1,0 +1,382 @@
+html,
+body {
+  height: 100%;
+  font-family: 'Russo One', sans-serif;
+  cursor: crosshair;
+}
+.container  {
+  display: table;
+  margin: 0 auto;
+  height: 100%;
+  width: 800px;
+
+  .game {
+    display: table-cell;
+    vertical-align: middle;
+
+    .bg {
+      background: url("../images/background.png") 0 50% no-repeat;
+      height: 480px;
+      width: 800px;
+      position: relative;
+      //overflow: hidden;
+
+      .message {
+        border-radius: 6px;
+        background: #fff;
+        color: #000;
+        text-align: center;
+        position: absolute;
+        padding: 5px 10px;
+        width: 150px;
+        bottom: 40px;
+        left: 50%;
+        margin-left: -75px;
+      }
+
+      .fail-target {
+        //background: rgba(0, 128, 0, 0.33);
+        height: 100%;
+        width: 100%;
+      }
+
+      .level-info {
+        border: 2px solid #fff;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 0 10px;
+        width: 100px;
+        bottom: 30px;
+        left: 30px;
+        position: absolute;
+        opacity: 0;
+        &.visible {
+          opacity: 1;
+          transition: all 1s linear;
+        }
+      }
+
+
+      .overlay {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.9);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        transition: all 0.5s ease-out;
+        &.hide {
+          visibility: hidden;
+          opacity: 0;
+        }
+      }
+
+      .text-box {
+        color: #fff;
+        position: absolute;
+        font-size: 14px;
+        line-height: 24px;
+        width: 700px;
+        top: 30px;
+        left: 30px;
+        opacity: 0;
+        &.visible {
+          opacity: 1;
+          transition: all 1s linear;
+        }
+        .player-time, .gunman-time, .gunman-reward {
+          border-radius: 6px;
+          box-sizing: content-box;
+          width: 180px;
+          margin: 0 10px;
+          float: left;
+          padding: 0 10px;
+          border: 2px solid #fff;
+          .span {
+            float: left;
+          }
+          .value {
+            float: right;
+          }
+        }
+
+      }
+
+      .start-game {
+        cursor: pointer;
+        color: #fff;
+        font-size: 30px;
+        line-height: 40px;
+        border: 2px solid #fff;
+        border-radius: 6px;
+        position: absolute;
+        width: 300px;
+        height: 40px;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        margin-left: -150px;
+        margin-top: -20px;
+        text-transform: uppercase;
+        .small {
+          font-size: 20px;
+        }
+      }
+
+      .score-info {
+        border: 2px solid #fff;
+        color: #fff;
+        border-radius: 6px;
+        padding: 0 15px;
+        width: 250px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        top: 30%;
+        left: 50%;
+        margin-left: -140px;
+        position: absolute;
+        opacity: 0;
+        &.visible {
+          opacity: 1;
+          transition: all 1s linear;
+        }
+        .span {
+          float: left;
+        }
+        .span.value {
+          float: right;
+        }
+      }
+
+      .totalscore-info {
+        border: 2px solid #fff;
+        color: #fff;
+        border-radius: 6px;
+        padding: 0 15px;
+        width: 250px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        top: 62%;
+        left: 50%;
+        margin-left: -140px;
+        position: absolute;
+        opacity: 0;
+        &.visible {
+          opacity: 1;
+          transition: all 1s linear;
+        }
+        .span {
+          float: left;
+        }
+        .span.value {
+          float: right;
+        }
+      }
+
+
+      .gunman {
+        position: absolute;
+        bottom: 160px;
+        left: 110%;
+        margin-left: -36px;
+
+        > .target {
+          //background: rgba(255, 0, 0, 0.15);
+          height: 100%;
+          width: 100%;
+        }
+
+        &.billy {
+          height: 132px;
+          width: 72px;
+          background-image: url("../images/outlaw/billy-sprite.png");
+          background-repeat: no-repeat;
+
+          &.walk {
+            animation: billy-walk 0.7s step-start;
+            animation-iteration-count: infinite;
+          }
+
+          &.move {
+            transition: all 4s linear;
+          }
+
+          &.centered {
+            left: 50%;
+            width: 72px;
+            height: 132px;
+          }
+
+          &.stay {
+            background-position: -0px -0px;
+          }
+
+          &.unholster {
+            background-position: -0px -584px;
+            width: 72px;
+            height: 132px;
+            margin-left: -34px;
+        }
+
+          &.aim {
+            background-position: -0px -384px;
+            //bottom: 156px;
+            width: 72px;
+            height: 126px;
+          }
+
+          &.aim-eyes-not-shine {
+            background-position: -0px -132px;
+            width: 72px;
+            height: 126px;
+          }
+
+          &.aim-win {
+            background-position: -0px -258px;
+            width: 72px;
+            height: 126px;
+          }
+
+          &.hat {
+            background-position: -0px -978px;
+            width: 56px;
+            height: 22px;
+          }
+
+          &.fall {
+            background-position: -0px -510px;
+            bottom: 156px;
+            width: 72px;
+            height: 74px;;
+          }
+
+
+        }
+
+        &.bob {
+          height: 132px;
+          width: 72px;
+          background-image: url("../images/outlaw/billy-sprite.png");
+          background-repeat: no-repeat;
+
+          &.walk {
+            animation: billy-walk 0.7s step-start;
+            animation-iteration-count: infinite;
+          }
+
+          &.move {
+            transition: all 4s linear;
+          }
+
+          &.centered {
+            left: 50%;
+            width: 72px;
+            height: 132px;
+          }
+
+          &.stay {
+            background-position: -0px -0px;
+          }
+
+          &.unholster {
+            background-position: -0px -584px;
+            width: 72px;
+            height: 132px;
+            margin-left: -34px;
+          }
+
+          &.aim {
+            background-position: -0px -384px;
+            //bottom: 156px;
+            width: 72px;
+            height: 126px;
+          }
+
+          &.aim-eyes-not-shine {
+            background-position: -0px -132px;
+            width: 72px;
+            height: 126px;
+          }
+
+          &.aim-win {
+            background-position: -0px -258px;
+            width: 72px;
+            height: 126px;
+          }
+
+          &.hat {
+            background-position: -0px -978px;
+            width: 56px;
+            height: 22px;
+          }
+
+          &.fall {
+            background-position: -0px -510px;
+            bottom: 156px;
+            width: 72px;
+            height: 74px;;
+          }
+
+
+        }
+
+        .head {
+          border: 1px solid green;
+          height: 42px;
+          width: 100%;
+        }
+
+        .top-left {
+          border: 1px solid red;
+          height: 40px;
+          width: 50%;
+          float: right;
+        }
+
+        .top-right {
+          border: 1px solid red;
+          height: 40px;
+          width: 50%;
+        }
+
+        .bottom-left {
+          border: 1px solid red;
+          height: 40px;
+          width: 50%;
+          float: right;
+        }
+
+        .bottom-right {
+          border: 1px solid red;
+          height: 40px;
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+@-webkit-keyframes billy-walk {
+  0% {
+    background-position: 0 -714px;
+  }
+  25% {
+    background-position: 0 -846px;
+  }
+  50% {
+    background-position: 0 -714px;
+  }
+  75% {
+    background-position: 0 -846px;
+  }
+  100% {
+    background-position: 0 -714px;
+
+  }
+
+}
+
